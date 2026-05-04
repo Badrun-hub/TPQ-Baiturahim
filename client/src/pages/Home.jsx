@@ -333,10 +333,10 @@ export default function Home() {
                   </div>
                   <h4 className="font-bold text-slate-800 dark:text-white mb-2">{item.title}</h4>
                   {item.link ? (
-                    <a 
-                      href={item.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors"
                     >
                       {item.text}
@@ -350,7 +350,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA crata */}
         <section className="py-24 px-4 bg-slate-50 dark:bg-slate-900/50">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
