@@ -50,7 +50,14 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Phone className="w-4 h-4 shrink-0" />
-                <span>+62 877-0014-7309</span>
+                <a 
+                  href="https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website." 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors"
+                >
+                  +62 877-0014-7309
+                </a>
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Mail className="w-4 h-4 shrink-0" />

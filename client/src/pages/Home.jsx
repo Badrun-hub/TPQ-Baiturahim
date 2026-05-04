@@ -325,14 +325,25 @@ export default function Home() {
               {[
                 { icon: MapPin, title: 'Lokasi Kami', text: 'Jl. Kalpataru, Lendang Bunga Selatan, Kalijaga Baru' },
                 { icon: Clock, title: 'Waktu Belajar', text: 'Senin - Sabtu: 18:05 - 19:20' },
-                { icon: Users, title: 'Pendaftaran', text: 'Hubungi Sekretariat: +62 877-0014-7309' },
+                { icon: Users, title: 'Pendaftaran', text: 'Hubungi Sekretariat: +62 877-0014-7309', link: 'https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website.' },
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center text-center p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
                   <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-4 text-blue-500">
                     <item.icon className="w-6 h-6" />
                   </div>
                   <h4 className="font-bold text-slate-800 dark:text-white mb-2">{item.title}</h4>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">{item.text}</p>
+                  {item.link ? (
+                    <a 
+                      href={item.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors"
+                    >
+                      {item.text}
+                    </a>
+                  ) : (
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{item.text}</p>
+                  )}
                 </div>
               ))}
             </div>
