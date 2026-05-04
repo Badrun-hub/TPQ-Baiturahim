@@ -1,0 +1,49 @@
+# Node modules
+node_modules/
+*/node_modules/
+
+# Environment files (SANGAT PENTING! Jangan pernah commit ini)
+.env
+.env.local
+.env.production
+.env.development
+backend/.env
+frontend/.env.local
+
+# Database SQLite lokal
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+prisma/dev.db
+prisma/*.db
+
+# Build output
+dist/
+build/
+.next/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+.DS_Store?
+
+# Prisma generated (akan di-generate saat deploy)
+# Jangan exclude ini karena Railway butuh: 
+# prisma/migrations/ → INCLUDE (commit migrations)
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Upload folder lokal
+backend/uploads/
+backend/public/uploads/

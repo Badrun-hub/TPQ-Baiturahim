@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  nama      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model Santri {
+  id        Int        @id @default(autoincrement())
+  nama      String
+  kelas     String
+  alamat    String     @default("")
+  noHp      String     @default("")
+  createdAt DateTime   @default(now())
+  absensi   Absensi[]
+  keuangan  Keuangan[]
+}
+
+model Absensi {
+  id       Int      @id @default(autoincrement())
+  santriId Int
+  tanggal  String   // YYYY-MM-DD format for SQLite compatibility
+  status   String   // "Hadir" | "Izin" | "Sakit" | "Alpha"
+  santri   Santri   @relation(fields: [santriId], references: [id], onDelete: Cascade)
+
+  @@unique([santriId, tanggal])
+}
+
+model Keuangan {
+  id       Int    @id @default(autoincrement())
+  santriId Int
+  bulan    Int    // 1-12
+  tahun    Int
+  jumlah   Int    // amount in Rupiah
+  status   String // "Lunas" | "Belum Lunas"
+  catatan  String @default("")
+  santri   Santri @relation(fields: [santriId], references: [id], onDelete: Cascade)
+
+  @@unique([santriId, bulan, tahun])
+}
+
+model Galeri {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  deskripsi String   @default("")
+  kategori  String   @default("Kegiatan")
+  imageUrl  String
+  tahun     Int
+  createdAt DateTime @default(now())
+}
+
+model Prestasi {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  nama      String   // nama santri / tim
+  lomba     String
+  tingkat   String   // "Kecamatan" | "Kabupaten" | "Provinsi" | "Nasional"
+  peringkat String   // "Juara 1" | "Juara 2" | "Juara 3" | "Harapan"
+  tahun     Int
+  deskripsi String   @default("")
+  createdAt DateTime @default(now())
+}
