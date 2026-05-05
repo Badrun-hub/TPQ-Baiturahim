@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "tpq-backend",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -7,16 +7,24 @@
     "start": "node src/index.js",
     "seed": "node prisma/seed.js",
     "db:migrate": "npx prisma migrate dev",
-    "db:studio": "npx prisma studio"
+    "db:studio": "npx prisma studio",
+    "build": "npx prisma generate"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "express": "^5.1.0",
+    "@libsql/client": "^0.17.3",
+    "@prisma/adapter-libsql": "^7.8.0",
     "@prisma/client": "^6.5.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "multer": "^1.4.5-lts.2"
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
     "prisma": "^6.5.0"
