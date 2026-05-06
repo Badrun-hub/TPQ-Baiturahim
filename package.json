@@ -7,7 +7,7 @@
     "server"
   ],
   "scripts": {
-    "build:client": "npm run build --workspace=client",
+    "build:client": "npm run build -w client",
     "build:server": "npx prisma generate --schema=server/prisma/schema.prisma",
     "build": "npm run build:client && npm run build:server"
   },
