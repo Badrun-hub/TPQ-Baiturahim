@@ -22,7 +22,7 @@ const pengajar = [
   { nama: 'Ustadz Rahman S.Pd', peran: 'Pembina TPQ', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/Rahman.jpg' },
   { nama: 'Ustadz M Sadir S.Pd', peran: 'Pembina TPQ', spesialisasi: 'Karakter Islami', foto: '/pengajar/Sadir.jpg' },
   { nama: 'Ustadz Fatoni Yusro S.pd', peran: 'Kepala TPQ', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/yusro.jpg' },
-  { nama: 'Ustadz Badarudin', peran: 'Sekretaris', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/Badarudin.jpg' },
+  { nama: 'Ustadz Badarudin', peran: 'Sekretaris', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/badrun.jpg' },
   { nama: 'Ustadzah Asmawati', peran: 'Koordinator Iqra', spesialisasi: 'Metode Tilawati', foto: '/pengajar/Asmawati.jpg' },
   { nama: 'Ustadz Apriliana', peran: 'Sekretaris', spesialisasi: 'Tajwid & Makhraj', foto: '/pengajar/Apriliana.jpg' },
   { nama: 'Ustadzah Sakdian', peran: 'Bendahara', spesialisasi: 'Karakter Islami', foto: '/pengajar/Sakdiah.jpg' },
