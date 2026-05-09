@@ -5,6 +5,7 @@ import PageLayout from '../components/layout/PageLayout';
 import { Card, CardContent, Table, Skeleton, Badge, Input, Select } from '../components/ui';
 import api from '../utils/api';
 import { formatRupiah, namaBulan } from '../utils/format';
+import { Helmet } from 'react-helmet-async';
 
 export default function Keuangan() {
   const [data, setData] = useState([]);
@@ -50,6 +51,10 @@ export default function Keuangan() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>Informasi Keuangan & SPP - TPQ Baiturrahim Lombok Timur</title>
+        <meta name="description" content="Transparansi informasi keuangan dan status pembayaran SPP santri TPQ Baiturrahim Lombok Timur." />
+      </Helmet>
       <div className="pt-8 min-h-screen">
         <section className="py-20 bg-gradient-to-b from-green-50/50 dark:from-slate-900 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +62,7 @@ export default function Keuangan() {
               <span className="text-green-600 dark:text-green-400 font-bold tracking-widest uppercase text-sm">Transparansi</span>
               <h1 className="text-4xl sm:text-6xl font-bold text-slate-800 dark:text-white mt-3 mb-6">Informasi Keuangan</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
-                Akses terbuka untuk memantau status pembayaran SPP santri sebagai wujud akuntabilitas pengelolaan TPQ Baiturahim.
+                Akses terbuka untuk memantau status pembayaran SPP santri sebagai wujud akuntabilitas pengelolaan TPQ Baiturrahim.
               </p>
             </motion.div>
           </div>

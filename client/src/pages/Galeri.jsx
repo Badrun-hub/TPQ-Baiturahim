@@ -4,6 +4,7 @@ import { Image as ImageIcon, Filter, Calendar, X } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { Card, Skeleton, Badge, Button, Dialog } from '../components/ui';
 import api from '../utils/api';
+import { Helmet } from 'react-helmet-async';
 
 export default function Galeri() {
   const [galeri, setGaleri] = useState([]);
@@ -30,6 +31,10 @@ export default function Galeri() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>Galeri Kegiatan - TPQ Baiturrahim Lombok Timur</title>
+        <meta name="description" content="Lihat dokumentasi kegiatan, prestasi, dan momen berharga santri TPQ Baiturrahim Lombok Timur dalam membangun generasi Qur'ani." />
+      </Helmet>
       <div className="pt-8 min-h-screen">
         <section className="py-20 bg-gradient-to-b from-blue-50/50 dark:from-slate-900 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +42,7 @@ export default function Galeri() {
               <span className="text-blue-500 font-bold tracking-widest uppercase text-sm">Dokumentasi</span>
               <h1 className="text-4xl sm:text-6xl font-bold text-slate-800 dark:text-white mt-3 mb-6">Galeri Kegiatan</h1>
               <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
-                Momen-momen berharga dalam perjalanan belajar, prestasi, dan kebersamaan santri TPQ Baiturahim.
+                Momen-momen berharga dalam perjalanan belajar, prestasi, dan kebersamaan santri TPQ Baiturrahim.
               </p>
             </motion.div>
           </div>

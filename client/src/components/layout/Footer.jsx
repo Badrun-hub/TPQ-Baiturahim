@@ -14,11 +14,11 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-lg font-bold text-slate-800 dark:text-white">TPQ </span>
-                <span className="text-lg font-bold gradient-text">Baiturahim</span>
+                <span className="text-lg font-bold gradient-text">Baiturrahim</span>
               </div>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-              Taman Pendidikan Al-Qur'an Baiturahim Lombok Timur merupakan lembaga pendidikan Islam yang berdedikasi
+              Taman Pendidikan Al-Qur'an Baiturrahim Lombok Timur merupakan lembaga pendidikan Islam yang berdedikasi
               dalam membentuk generasi Qur'ani yang berakhlak mulia.
             </p>
           </div>
@@ -51,7 +51,7 @@ export default function Footer() {
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Phone className="w-4 h-4 shrink-0" />
                 <a
-                  href="https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website."
+                  href="https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturrahim%2C%20saya%20menghubungi%20dari%20website."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-500 transition-colors"
@@ -61,7 +61,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Mail className="w-4 h-4 shrink-0" />
-                <span>tpq.baiturahim@gmail.com</span>
+                <span>tpq.baiturrahim@gmail.com</span>
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Clock className="w-4 h-4 shrink-0" />
@@ -73,7 +73,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-200 dark:border-slate-800 mt-10 pt-6">
           <p className="text-center text-xs text-slate-400 dark:text-slate-500">
-            © {new Date().getFullYear()} TPQ Baiturahim. All rights reserved.
+            © {new Date().getFullYear()} TPQ Baiturrahim. All rights reserved.
           </p>
         </div>
       </div>

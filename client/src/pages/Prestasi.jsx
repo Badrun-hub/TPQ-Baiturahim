@@ -4,6 +4,7 @@ import { Trophy, Star, Medal, Filter, Search, Users } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { Card, CardContent, Skeleton, Badge, Input } from '../components/ui';
 import api from '../utils/api';
+import { Helmet } from 'react-helmet-async';
 
 const tingkatColors = {
   Kecamatan: 'primary',
@@ -46,6 +47,10 @@ export default function Prestasi() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>Prestasi Santri - TPQ Baiturrahim Lombok Timur</title>
+        <meta name="description" content="Daftar prestasi dan pencapaian santri TPQ Baiturrahim Lombok Timur dalam berbagai perlombaan keagamaan, tahfidz, dan tilawah." />
+      </Helmet>
       <div className="pt-8 min-h-screen">
         <section className="py-20 bg-gradient-to-b from-amber-50/50 dark:from-slate-900 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

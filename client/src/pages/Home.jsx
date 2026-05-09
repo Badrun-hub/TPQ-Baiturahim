@@ -6,12 +6,13 @@ import PageLayout from '../components/layout/PageLayout';
 import ParticleCanvas from '../components/particles/ParticleCanvas';
 import { Card, CardContent } from '../components/ui';
 import api from '../utils/api';
+import { Helmet } from 'react-helmet-async';
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
 const sejarah = [
-  { tahun: '2011', peristiwa: 'TPQ Baiturahim didirikan oleh tokoh masyarakat setempat dengan 10 santri pertama.' },
+  { tahun: '2011', peristiwa: 'TPQ Baiturrahim didirikan oleh tokoh masyarakat setempat dengan 10 santri pertama.' },
   { tahun: '2015', peristiwa: 'Pengembangan fasilitas dan penambahan tenaga pengajar profesional.' },
   { tahun: '2018', peristiwa: 'Peresmian kurikulum terintegrasi antara Al-Qur\'an dan pembinaan akhlak.' },
   { tahun: '2021', peristiwa: 'Adaptasi metode pembelajaran modern dan digitalisasi administrasi santri.' },
@@ -58,8 +59,36 @@ export default function Home() {
     { icon: Heart, label: 'Tahun Berdiri', value: '15' },
   ];
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "TPQ Baiturrahim Lombok Timur",
+    "description": "Lembaga pendidikan Al-Qur'an terpercaya di Kalijaga Baru, Lombok Timur.",
+    "url": "https://tpq-baiturahim.vercel.app/",
+    "logo": "https://tpq-baiturahim.vercel.app/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Jl. Kalpataru, Lendang Bunga Selatan",
+      "addressLocality": "Kalijaga Baru",
+      "addressRegion": "Lombok Timur",
+      "addressCountry": "ID"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+6287700147309",
+      "contactType": "customer service"
+    }
+  };
+
   return (
     <PageLayout>
+      <Helmet>
+        <title>TPQ Baiturrahim Lombok Timur - Membentuk Generasi Qur'ani</title>
+        <meta name="description" content="TPQ Baiturrahim Lombok Timur adalah lembaga pendidikan Al-Qur'an terpercaya di Kalijaga Baru yang fokus pada pembentukan generasi Qur'ani yang berakhlak mulia." />
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
       <div className="overflow-x-hidden">
         {/* HERO */}
         <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
@@ -84,7 +113,7 @@ export default function Home() {
           >
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium mb-6">
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-              TPQ Baiturahim Lombok Timur
+              TPQ Baiturrahim Lombok Timur
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-bold text-4xl sm:text-6xl lg:text-7xl text-slate-800 dark:text-white mb-4 sm:mb-6 leading-tight">
@@ -92,7 +121,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-base sm:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
-              TPQ Baiturahim — tempat terbaik bagi putra-putri Anda untuk menemukan keindahan Al-Qur'an dan membangun fondasi iman yang kokoh.
+              TPQ Baiturrahim — tempat terbaik bagi putra-putri Anda untuk menemukan keindahan Al-Qur'an dan membangun fondasi iman yang kokoh.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
@@ -216,7 +245,7 @@ export default function Home() {
                 <span className="text-blue-500 font-bold tracking-widest uppercase text-sm">Program Kami</span>
                 <h2 className="text-4xl font-bold text-slate-800 dark:text-white mt-3 mb-6 leading-tight">Pendidikan Al-Qur'an dengan Metode Modern</h2>
                 <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6 text-lg">
-                  Sejak berdiri, TPQ Baiturahim berkomitmen memberikan pengajaran Al-Qur'an yang efektif bagi anak-anak. Kami menggabungkan metode tradisional yang kuat dengan pendekatan interaktif.
+                  Sejak berdiri, TPQ Baiturrahim berkomitmen memberikan pengajaran Al-Qur'an yang efektif bagi anak-anak. Kami menggabungkan metode tradisional yang kuat dengan pendekatan interaktif.
                 </p>
                 <ul className="space-y-4 mb-8">
                   {['Pembelajaran Iqra & Al-Qur\'an', 'Tahfidz Juz Amma', 'Pembinaan Akhlakul Karimah', 'Persiapan Lomba Keagamaan'].map((item, i) => (
@@ -326,7 +355,7 @@ export default function Home() {
               {[
                 { icon: MapPin, title: 'Lokasi Kami', text: 'Jl. Kalpataru, Lendang Bunga Selatan, Kalijaga Baru' },
                 { icon: Clock, title: 'Waktu Belajar', text: 'Senin - Sabtu: 18:05 - 19:20' },
-                { icon: Users, title: 'Pendaftaran', text: 'Hubungi Sekretariat: +62 877-0014-7309', link: 'https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website.' },
+                { icon: Users, title: 'Pendaftaran', text: 'Hubungi Sekretariat: +62 877-0014-7309', link: 'https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturrahim%2C%20saya%20menghubungi%20dari%20website.' },
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center text-center p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
                   <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-4 text-blue-500">
@@ -358,7 +387,7 @@ export default function Home() {
               <Star className="w-10 h-10 text-amber-400 mx-auto mb-6 animate-pulse" />
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 dark:text-white mb-6">Daftarkan Putra-Putri Anda Sekarang</h2>
               <p className="text-slate-500 dark:text-slate-400 mb-10 text-lg max-w-2xl mx-auto">
-                Bergabunglah bersama keluarga besar TPQ Baiturahim dan saksikan perkembangan spiritual buah hati Anda.
+                Bergabunglah bersama keluarga besar TPQ Baiturrahim dan saksikan perkembangan spiritual buah hati Anda.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a

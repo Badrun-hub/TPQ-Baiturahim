@@ -5,4 +5,19 @@
     <lastmod>2026-05-09</lastmod>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://tpq-baiturahim.vercel.app/galeri</loc>
+    <lastmod>2026-05-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tpq-baiturahim.vercel.app/prestasi</loc>
+    <lastmod>2026-05-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tpq-baiturahim.vercel.app/keuangan</loc>
+    <lastmod>2026-05-09</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
