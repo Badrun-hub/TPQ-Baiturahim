@@ -18,7 +18,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-              Taman Pendidikan Al-Qur'an Baiturahim merupakan lembaga pendidikan Islam yang berdedikasi
+              Taman Pendidikan Al-Qur'an Baiturahim Lombok Timur merupakan lembaga pendidikan Islam yang berdedikasi
               dalam membentuk generasi Qur'ani yang berakhlak mulia.
             </p>
           </div>
@@ -46,13 +46,13 @@ export default function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Jl. kalpataru 01, Lendang Bunga Setan, Kalijaga Baru</span>
+                <span>Jl. kalpataru 01, Lendang Bunga Setan, Kalijaga Baru, Lombok Timur</span>
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Phone className="w-4 h-4 shrink-0" />
-                <a 
-                  href="https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website." 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/6287700147309?text=Halo%20TPQ%20Baiturahim%2C%20saya%20menghubungi%20dari%20website."
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-500 transition-colors"
                 >
