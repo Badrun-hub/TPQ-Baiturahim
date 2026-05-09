@@ -22,11 +22,12 @@ const pengajar = [
   { nama: 'Ustadz Rahman S.Pd', peran: 'Pembina TPQ', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/Rahman.jpg' },
   { nama: 'Ustadz M Sadir S.Pd', peran: 'Pembina TPQ', spesialisasi: 'Karakter Islami', foto: '/pengajar/Sadir.jpg' },
   { nama: 'Ustadz Fatoni Yusro S.pd', peran: 'Kepala TPQ', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/yusro.jpg' },
-  { nama: 'Ustadz Badarudin', peran: 'Sekretaris', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/badrun.jpg' },
-  { nama: 'Ustadzah Asmawati', peran: 'Koordinator Iqra', spesialisasi: 'Metode Tilawati', foto: '/pengajar/Asmawati.jpg' },
-  { nama: 'Ustadz Apriliana', peran: 'Sekretaris', spesialisasi: 'Tajwid & Makhraj', foto: '/pengajar/Apriliana.jpg' },
+  { nama: 'Ustadz Badarudin', peran: 'Sekretaris TPQ | Developer', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/badrun.jpg' },
+  { nama: 'Ustadz Amrizal', peran: 'Anggota TPQ', spesialisasi: 'Tahfidz Al-Qur\'an', foto: '/pengajar/Amrizal.jpg' },
+  { nama: 'Ustadzah Asmawati', peran: 'Anggota TPQ', spesialisasi: 'Metode Tilawati', foto: '/pengajar/Asmawati.jpg' },
   { nama: 'Ustadzah Sakdian', peran: 'Bendahara', spesialisasi: 'Karakter Islami', foto: '/pengajar/Sakdiah.jpg' },
-  { nama: 'Ustadzah Andayani', peran: 'Koordinator Iqra', spesialisasi: 'Karakter Islami', foto: '/pengajar/Andayani.jpg' },
+  { nama: 'Ustadz Apriliana', peran: 'Anggota TPQ', spesialisasi: 'Tajwid & Makhraj', foto: '/pengajar/Apriliana.jpg' },
+  { nama: 'Ustadzah Andayani', peran: 'Anggota TPQ', spesialisasi: 'Karakter Islami', foto: '/pengajar/Andayani.jpg' },
 ];
 
 export default function Home() {
