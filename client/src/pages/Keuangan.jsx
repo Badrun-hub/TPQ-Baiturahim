@@ -138,7 +138,7 @@ export default function Keuangan() {
                   </Select>
                 </div>
               </CardContent>
-            </Card>
+            
 
             {/* Table */}
             {loading ? (
@@ -187,6 +187,7 @@ export default function Keuangan() {
                 ))}
               </Table>
             )}
+          </Card>
           </div>
         </section>
 
