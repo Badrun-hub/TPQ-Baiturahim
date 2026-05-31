@@ -27,8 +27,8 @@ export default function KeuanganAdmin() {
     try {
       const res = await api.get('/keuangan');
       setData(Array.isArray(res.data) ? res.data : []);
-    } catch (e) { 
-      console.error(e); 
+    } catch (e) {
+      console.error(e);
       setData([]);
     }
     setLoading(false);
@@ -38,8 +38,8 @@ export default function KeuanganAdmin() {
     try {
       const res = await api.get('/santri');
       setSantri(Array.isArray(res.data) ? res.data : []);
-    } catch (e) { 
-      console.error(e); 
+    } catch (e) {
+      console.error(e);
       setSantri([]);
     }
   };
@@ -62,13 +62,13 @@ export default function KeuanganAdmin() {
 
   const handleEdit = (item) => {
     setEditingId(item.id);
-    setFormData({ 
-      santriId: item.santriId, 
-      bulan: item.bulan, 
-      tahun: item.tahun, 
-      jumlah: item.jumlah, 
-      status: item.status, 
-      catatan: item.catatan || '' 
+    setFormData({
+      santriId: item.santriId,
+      bulan: item.bulan,
+      tahun: item.tahun,
+      jumlah: item.jumlah,
+      status: item.status,
+      catatan: item.catatan || ''
     });
     setShowModal(true);
   };
@@ -103,32 +103,60 @@ export default function KeuanganAdmin() {
         </Button>
       </div>
 
+      {/* Stats Cards */}
+      <section className="py-8 px-4 -mt-12 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {stats.map((s, i) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="shadow-lg shadow-slate-200/50 dark:shadow-none">
+                  <CardContent className="p-6 flex items-center gap-5">
+                    <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center shrink-0`}>
+                      <s.icon className={`w-6 h-6 ${s.color}`} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{s.label} ({filterTahun})</p>
+                      <p className={`text-xl font-bold mt-0.5 ${s.color}`}>{s.value}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Card className="mb-6">
         <CardContent className="p-4 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
           <div className="md:col-span-2 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <Input 
-              className="pl-10" 
-              placeholder="Cari nama santri..." 
+            <Input
+              className="pl-10"
+              placeholder="Cari nama santri..."
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
           </div>
-          <Select 
-            value={filterBulan} 
+          <Select
+            value={filterBulan}
             onChange={e => setFilterBulan(e.target.value)}
           >
             <option value="">Semua Bulan</option>
             {namaBulan.slice(1).map((b, i) => <option key={i} value={i + 1}>{b}</option>)}
           </Select>
-          <Select 
-            value={filterTahun} 
+          <Select
+            value={filterTahun}
             onChange={e => setFilterTahun(e.target.value)}
           >
             {[2024, 2025, 2026].map(y => <option key={y} value={y}>{y}</option>)}
           </Select>
-          <Select 
-            value={limit} 
+          <Select
+            value={limit}
             onChange={e => setLimit(e.target.value)}
           >
             <option value="5">Tampilkan 5</option>
@@ -139,7 +167,7 @@ export default function KeuanganAdmin() {
         </CardContent>
       </Card>
 
-      <Table 
+      <Table
         headers={[
           { label: 'Nama Santri' },
           { label: 'Bulan & Tahun' },
@@ -184,14 +212,14 @@ export default function KeuanganAdmin() {
         )}
       </Table>
 
-      <Dialog 
-        open={showModal} 
+      <Dialog
+        open={showModal}
         onClose={() => setShowModal(false)}
         title={editingId ? 'Edit Pembayaran' : 'Catat Pembayaran Baru'}
       >
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Select 
-            label="Pilih Santri" 
+          <Select
+            label="Pilih Santri"
             value={formData.santriId}
             onChange={e => setFormData({ ...formData, santriId: e.target.value })}
             required
@@ -201,15 +229,15 @@ export default function KeuanganAdmin() {
           </Select>
 
           <div className="grid grid-cols-2 gap-4">
-            <Select 
-              label="Bulan" 
+            <Select
+              label="Bulan"
               value={formData.bulan}
               onChange={e => setFormData({ ...formData, bulan: e.target.value })}
             >
               {namaBulan.slice(1).map((b, i) => <option key={i} value={i + 1}>{b}</option>)}
             </Select>
-            <Select 
-              label="Tahun" 
+            <Select
+              label="Tahun"
               value={formData.tahun}
               onChange={e => setFormData({ ...formData, tahun: e.target.value })}
             >
@@ -217,16 +245,16 @@ export default function KeuanganAdmin() {
             </Select>
           </div>
 
-          <Input 
-            label="Jumlah Pembayaran (Rp)" 
+          <Input
+            label="Jumlah Pembayaran (Rp)"
             type="number"
             value={formData.jumlah}
             onChange={e => setFormData({ ...formData, jumlah: e.target.value })}
             required
           />
 
-          <Select 
-            label="Status" 
+          <Select
+            label="Status"
             value={formData.status}
             onChange={e => setFormData({ ...formData, status: e.target.value })}
           >
@@ -234,9 +262,9 @@ export default function KeuanganAdmin() {
             <option>Belum Lunas</option>
           </Select>
 
-          <Input 
-            label="Catatan" 
-            placeholder="Contoh: Titip ke wali" 
+          <Input
+            label="Catatan"
+            placeholder="Contoh: Titip ke wali"
             value={formData.catatan}
             onChange={e => setFormData({ ...formData, catatan: e.target.value })}
           />
