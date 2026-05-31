@@ -54,7 +54,7 @@ export default function Home() {
 
   const stats = [
     { icon: Users, label: 'Santri Aktif', value: `${statsData.totalSantri}+` },
-    { icon: BookOpen, label: 'Kelas', value: '8' },
+    { icon: BookOpen, label: 'Kelas', value: '3' },
     { icon: Trophy, label: 'Prestasi', value: `${statsData.totalPrestasi}+` },
     { icon: Heart, label: 'Tahun Berdiri', value: '15' },
   ];

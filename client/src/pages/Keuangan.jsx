@@ -110,31 +110,31 @@ export default function Keuangan() {
                   />
                 </div>
                 <div className="w-full sm:w-40">
-                  <Select label="Bulan" value={filterBulan} onChange={e => setFilterBulan(e.target.value)}>
+                  <Select  value={filterBulan} onChange={e => setFilterBulan(e.target.value)}>
                     <option value="">Semua Bulan</option>
                     {namaBulan.slice(1).map((b, i) => <option key={i} value={i + 1}>{b}</option>)}
                   </Select>
                 </div>
                 <div className="w-full sm:w-32">
-                  <Select label="Tahun" value={filterTahun} onChange={e => setFilterTahun(e.target.value)}>
+                  <Select  value={filterTahun} onChange={e => setFilterTahun(e.target.value)}>
                     <option>2026</option>
                     <option>2025</option>
                     <option>2024</option>
                   </Select>
                 </div>
                 <div className="w-full sm:w-40">
-                  <Select label="Status" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+                  <Select  value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
                     <option value="">Semua Status</option>
                     <option>Lunas</option>
                     <option>Belum Lunas</option>
                   </Select>
                 </div>
                 <div className="w-full sm:w-40">
-                  <Select label="Tampilkan" value={limit} onChange={e => setLimit(e.target.value)}>
-                    <option value="5">5 Data</option>
-                    <option value="10">10 Data</option>
-                    <option value="50">50 Data</option>
-                    <option value="semua">Semua</option>
+                  <Select  value={limit} onChange={e => setLimit(e.target.value)}>
+                    <option value="5">Tampilkan 5 Data</option>
+                    <option value="10">Tampilkan 10 Data</option>
+                    <option value="50">Tampilkan 50 Data</option>
+                    <option value="semua">Tampilkan Semua</option>
                   </Select>
                 </div>
               </CardContent>
