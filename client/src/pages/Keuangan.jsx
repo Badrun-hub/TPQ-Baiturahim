@@ -69,7 +69,7 @@ export default function Keuangan() {
         </section>
 
         {/* Stats Cards */}
-        <section className="py-8 px-4 -mt-12 relative z-10">
+        {/* <section className="py-8 px-4 -mt-12 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {stats.map((s, i) => (
@@ -94,7 +94,7 @@ export default function Keuangan() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Filters */}
         <section className="py-12 px-4">
@@ -102,9 +102,9 @@ export default function Keuangan() {
             <Card className="mb-8">
               <CardContent className="p-6 flex flex-wrap gap-4 items-end">
                 <div className="flex-1 min-w-[240px]">
-                  <Input 
-                    label="Cari Nama Santri" 
-                    placeholder="Masukkan nama santri..." 
+                  <Input
+                    label="Cari Nama Santri"
+                    placeholder="Masukkan nama santri..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                   />
@@ -151,7 +151,7 @@ export default function Keuangan() {
                 <p className="text-slate-500">Tidak ada data pembayaran ditemukan.</p>
               </div>
             ) : (
-              <Table 
+              <Table
                 headers={[
                   { label: 'Nama Santri' },
                   { label: 'Kelas' },
