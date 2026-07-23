@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -23,7 +23,32 @@ export default function AdminLayout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(true);
+
+  const desktopSidebarRef = useRef(null);
+  const mobileSidebarRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // Desktop: collapse when clicking outside
+      if (!collapsed && desktopSidebarRef.current && !desktopSidebarRef.current.contains(event.target)) {
+        setCollapsed(true);
+      }
+
+      // Mobile: close when clicking outside
+      if (mobileOpen && mobileSidebarRef.current && !mobileSidebarRef.current.contains(event.target)) {
+        const menuButton = event.target.closest('header button');
+        if (!menuButton) {
+          setMobileOpen(false);
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [collapsed, mobileOpen]);
 
   const isActive = (path) => location.pathname === path;
 
@@ -112,7 +137,7 @@ export default function AdminLayout({ children }) {
   return (
     <div className="min-h-screen flex bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors">
       {/* Desktop Sidebar */}
-      <aside className={`hidden lg:flex flex-col fixed top-0 left-0 h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-40 ${collapsed ? 'w-[72px]' : 'w-64'}`}>
+      <aside ref={desktopSidebarRef} className={`hidden lg:flex flex-col fixed top-0 left-0 h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-40 ${collapsed ? 'w-[72px]' : 'w-64'}`}>
         <SidebarContent />
         <button
           onClick={() => setCollapsed(!collapsed)}
@@ -128,7 +153,7 @@ export default function AdminLayout({ children }) {
       )}
 
       {/* Mobile Sidebar */}
-      <aside className={`lg:hidden fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-50 transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside ref={mobileSidebarRef} className={`lg:hidden fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-50 transform transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <SidebarContent />
       </aside>
 

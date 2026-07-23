@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from './adminlayout';
-import { Plus, Search, Edit2, Trash2, Wallet, Filter, CheckCircle, Clock } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Wallet, Filter, CheckCircle, Clock, FileSpreadsheet } from 'lucide-react';
 import { Button, Input, Table, Badge, Dialog, Select, Card, CardContent } from '../../components/ui';
 import api from '../../utils/api';
 import { formatRupiah, namaBulan } from '../../utils/format';
+import { exportKeuanganToExcel } from '../../utils/excelExport';
 
 export default function KeuanganAdmin() {
   const [data, setData] = useState([]);
@@ -91,6 +92,10 @@ export default function KeuanganAdmin() {
 
   const displayedData = limit === 'semua' ? filtered : filtered.slice(0, parseInt(limit));
 
+  const handleExportExcel = () => {
+    exportKeuanganToExcel(filtered, filterBulan, filterTahun, search);
+  };
+
   return (
     <AdminLayout>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -98,9 +103,16 @@ export default function KeuanganAdmin() {
           <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Kelola Keuangan</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Manajemen pembayaran SPP santri</p>
         </div>
-        <Button onClick={() => { setEditingId(null); setShowModal(true); }}>
-          <Plus className="w-4 h-4" /> Catat Pembayaran
-        </Button>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button variant="outline" onClick={handleExportExcel} disabled={loading || filtered.length === 0} title="Export Laporan Keuangan ke Excel">
+            <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="hidden sm:inline">Export Excel</span>
+            <span className="sm:hidden">Excel</span>
+          </Button>
+          <Button onClick={() => { setEditingId(null); setShowModal(true); }}>
+            <Plus className="w-4 h-4" /> Catat Pembayaran
+          </Button>
+        </div>
       </div>
 
 

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from './adminlayout';
-import { Plus, Search, Edit2, Trash2, UserPlus, Filter, X } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, UserPlus, Filter, X, FileSpreadsheet } from 'lucide-react';
 import { Button, Input, Table, Badge, Dialog, Select, Card, CardContent } from '../../components/ui';
 import api from '../../utils/api';
 import { daftarKelas } from '../../utils/format';
+import { exportSantriToExcel } from '../../utils/excelExport';
 
 export default function SantriAdmin() {
   const [santri, setSantri] = useState([]);
@@ -66,6 +67,10 @@ export default function SantriAdmin() {
     (s.kelas?.toLowerCase().includes(search.toLowerCase()) || false)
   );
 
+  const handleExportExcel = () => {
+    exportSantriToExcel(filtered, search);
+  };
+
   return (
     <AdminLayout>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -73,9 +78,16 @@ export default function SantriAdmin() {
           <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Data Santri</h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Total {santri.length} santri terdaftar</p>
         </div>
-        <Button onClick={() => { setEditingId(null); setFormData({ nama: '', kelas: '', alamat: '', noHp: '' }); setShowModal(true); }}>
-          <UserPlus className="w-4 h-4" /> Tambah Santri
-        </Button>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button variant="outline" onClick={handleExportExcel} disabled={loading || santri.length === 0} title="Export Data Santri ke Excel">
+            <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="hidden sm:inline">Export Excel</span>
+            <span className="sm:hidden">Excel</span>
+          </Button>
+          <Button onClick={() => { setEditingId(null); setFormData({ nama: '', kelas: '', alamat: '', noHp: '' }); setShowModal(true); }}>
+            <UserPlus className="w-4 h-4" /> Tambah Santri
+          </Button>
+        </div>
       </div>
 
       <Card className="mb-6">

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from './adminlayout';
-import { Calendar as CalendarIcon, Check, X, AlertCircle, ChevronLeft, ChevronRight, UserCheck } from 'lucide-react';
+import { Calendar as CalendarIcon, Check, X, AlertCircle, ChevronLeft, ChevronRight, UserCheck, FileSpreadsheet } from 'lucide-react';
 import { Button, Table, Badge, Card, CardContent, Input, Select } from '../../components/ui';
 import api from '../../utils/api';
 import { daftarKelas } from '../../utils/format';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
+import { exportAbsensiToExcel } from '../../utils/excelExport';
 
 export default function AbsensiAdmin() {
   const [santri, setSantri] = useState([]);
@@ -68,6 +69,10 @@ export default function AbsensiAdmin() {
   const filteredSantri = santri.filter(s => !filterKelas || s.kelas === filterKelas);
   const progress = filteredSantri.length > 0 ? (filteredSantri.filter(s => getStatus(s.id) === 'Hadir').length / filteredSantri.length) * 100 : 0;
 
+  const handleExportExcel = () => {
+    exportAbsensiToExcel(filteredSantri, absensi, tanggal, filterKelas);
+  };
+
   return (
     <AdminLayout>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
@@ -78,6 +83,11 @@ export default function AbsensiAdmin() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <Button variant="outline" onClick={handleExportExcel} disabled={loading || filteredSantri.length === 0} title="Export Absensi ke Excel">
+            <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="hidden sm:inline">Export Excel</span>
+            <span className="sm:hidden">Excel</span>
+          </Button>
           <Select 
             value={filterKelas} 
             onChange={e => setFilterKelas(e.target.value)}
