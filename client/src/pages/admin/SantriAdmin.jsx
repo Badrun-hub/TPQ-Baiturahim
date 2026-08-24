@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from './adminlayout';
-import { Plus, Search, Edit2, Trash2, UserPlus, Filter, X, FileSpreadsheet } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, UserPlus, Filter, X, FileSpreadsheet, QrCode } from 'lucide-react';
 import { Button, Input, Table, Badge, Dialog, Select, Card, CardContent } from '../../components/ui';
 import api from '../../utils/api';
 import { daftarKelas } from '../../utils/format';
 import { exportSantriToExcel } from '../../utils/excelExport';
+import QRCode from 'qrcode';
 
 export default function SantriAdmin() {
   const [santri, setSantri] = useState([]);
@@ -14,7 +15,34 @@ export default function SantriAdmin() {
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({ nama: '', kelas: '', alamat: '', noHp: '' });
 
+  // QR Code Print States
+  const [selectedSantriIds, setSelectedSantriIds] = useState([]);
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [printQrCodes, setPrintQrCodes] = useState({});
+
   const uniqueKelas = daftarKelas;
+
+  const handleOpenPrintModal = async () => {
+    const qrMap = {};
+    for (const id of selectedSantriIds) {
+      const text = `TPQ-SANTRI-${id}`;
+      try {
+        const dataUrl = await QRCode.toDataURL(text, {
+          width: 250,
+          margin: 2,
+          color: {
+            dark: '#1e293b', // slate-800
+            light: '#ffffff'
+          }
+        });
+        qrMap[id] = dataUrl;
+      } catch (err) {
+        console.error('Failed to generate QR for student', id, err);
+      }
+    }
+    setPrintQrCodes(qrMap);
+    setShowPrintModal(true);
+  };
 
   useEffect(() => {
     fetchSantri();
@@ -79,6 +107,16 @@ export default function SantriAdmin() {
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Total {santri.length} santri terdaftar</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <Button 
+            variant="outline" 
+            onClick={handleOpenPrintModal} 
+            disabled={loading || selectedSantriIds.length === 0} 
+            title="Cetak QR Code Santri Terpilih"
+            className="border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+          >
+            <QrCode className="w-4 h-4" />
+            <span>Cetak QR ({selectedSantriIds.length})</span>
+          </Button>
           <Button variant="outline" onClick={handleExportExcel} disabled={loading || santri.length === 0} title="Export Data Santri ke Excel">
             <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span className="hidden sm:inline">Export Excel</span>
@@ -109,6 +147,23 @@ export default function SantriAdmin() {
 
       <Table
         headers={[
+          { 
+            label: (
+              <input
+                type="checkbox"
+                checked={selectedSantriIds.length === filtered.length && filtered.length > 0}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSelectedSantriIds(filtered.map(s => s.id));
+                  } else {
+                    setSelectedSantriIds([]);
+                  }
+                }}
+                className="rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+              />
+            ),
+            className: 'w-12 text-center'
+          },
           { label: 'Nama Lengkap' },
           { label: 'Kelas' },
           { label: 'No. HP Wali' },
@@ -117,12 +172,26 @@ export default function SantriAdmin() {
         ]}
       >
         {loading ? (
-          <tr><td colSpan="5" className="text-center py-12 text-slate-400">Memuat data...</td></tr>
+          <tr><td colSpan="6" className="text-center py-12 text-slate-400">Memuat data...</td></tr>
         ) : filtered.length === 0 ? (
-          <tr><td colSpan="5" className="text-center py-12 text-slate-400">Tidak ada data santri ditemukan.</td></tr>
+          <tr><td colSpan="6" className="text-center py-12 text-slate-400">Tidak ada data santri ditemukan.</td></tr>
         ) : (
           filtered.map(s => (
             <tr key={s.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+              <td className="px-5 py-4 w-12 text-center">
+                <input
+                  type="checkbox"
+                  checked={selectedSantriIds.includes(s.id)}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedSantriIds(prev => [...prev, s.id]);
+                    } else {
+                      setSelectedSantriIds(prev => prev.filter(id => id !== s.id));
+                    }
+                  }}
+                  className="rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+                />
+              </td>
               <td className="px-5 py-4">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold text-xs">
@@ -197,6 +266,102 @@ export default function SantriAdmin() {
           </div>
         </form>
       </Dialog>
+
+      {/* Dialog Preview Cetak QR Code */}
+      <Dialog
+        open={showPrintModal}
+        onClose={() => setShowPrintModal(false)}
+        title="Pratinjau Cetak QR Code"
+      >
+        <div className="space-y-4">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Berikut adalah pratinjau kartu absensi QR Code yang akan dicetak. Gunakan tombol di bawah untuk mencetak via printer fisik/virtual atau menyimpannya sebagai PDF.
+          </p>
+
+          <div className="max-h-[350px] overflow-y-auto border border-slate-100 dark:border-slate-800 rounded-2xl p-4 bg-slate-50 dark:bg-slate-950/50 space-y-4 custom-scrollbar">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {selectedSantriIds.map(id => {
+                const s = santri.find(item => item.id === id);
+                if (!s) return null;
+                return (
+                  <div key={id} className="border border-slate-200 dark:border-slate-800 rounded-2xl p-4 bg-white dark:bg-slate-900 text-center flex flex-col items-center justify-center shadow-sm">
+                    <div className="text-[10px] font-extrabold text-blue-500 uppercase tracking-wider">TPQ BAITURRAHIM</div>
+                    <div className="w-full border-t border-slate-100 dark:border-slate-800 my-1.5" />
+                    <img src={printQrCodes[id]} alt="QR Preview" className="w-24 h-24 my-1" />
+                    <div className="font-bold text-xs text-slate-800 dark:text-white truncate max-w-full">{s.nama}</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">{s.kelas}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <Button variant="secondary" onClick={() => setShowPrintModal(false)}>Tutup</Button>
+            <Button 
+              onClick={() => {
+                window.print();
+              }}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Cetak Sekarang
+            </Button>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* Print Area (Hidden in browser viewport, visible only during printing) */}
+      <div id="print-area-root" className="hidden">
+        <style>{`
+          @media print {
+            body * {
+              visibility: hidden !important;
+            }
+            #print-area-root, #print-area-root * {
+              visibility: visible !important;
+            }
+            #print-area-root {
+              position: absolute !important;
+              left: 0 !important;
+              top: 0 !important;
+              width: 100% !important;
+              display: block !important;
+              background: white !important;
+              padding: 10px !important;
+            }
+            .qr-print-card {
+              border: 2px dashed #cbd5e1 !important;
+              border-radius: 12px !important;
+              padding: 16px !important;
+              text-align: center !important;
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              justify-content: center !important;
+              page-break-inside: avoid !important;
+              background: white !important;
+              color: black !important;
+            }
+          }
+        `}</style>
+        <div className="grid grid-cols-2 gap-6">
+          {selectedSantriIds.map(id => {
+            const s = santri.find(item => item.id === id);
+            if (!s) return null;
+            return (
+              <div key={id} className="qr-print-card border border-slate-300 rounded-xl p-4 flex flex-col items-center justify-center bg-white text-slate-900">
+                <div className="text-xs font-extrabold tracking-wider text-blue-600 uppercase">TPQ BAITURRAHIM</div>
+                <div className="text-[10px] text-slate-500 font-medium">Kalijaga Baru, Lombok Timur</div>
+                <div className="w-full border-t border-slate-200 my-2" />
+                <img src={printQrCodes[id]} alt={`QR Code ${s.nama}`} className="w-36 h-36 mx-auto object-contain" />
+                <div className="font-extrabold text-sm mt-1 uppercase tracking-wide">{s.nama}</div>
+                <div className="text-xs font-bold text-slate-500 bg-slate-100 rounded-full px-3 py-0.5 mt-1">{s.kelas}</div>
+                <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2">KARTU ABSENSI MANDIRI</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </AdminLayout>
   );
 }
