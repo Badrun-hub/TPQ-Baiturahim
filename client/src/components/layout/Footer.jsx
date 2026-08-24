@@ -32,6 +32,7 @@ export default function Footer() {
                 { to: '/galeri', label: 'Galeri' },
                 { to: '/prestasi', label: 'Prestasi' },
                 { to: '/keuangan', label: 'Keuangan' },
+                { to: '/kontak', label: 'Kontak' },
               ].map(link => (
                 <Link key={link.to} to={link.to} className="text-sm text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
                   {link.label}
@@ -61,7 +62,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Mail className="w-4 h-4 shrink-0" />
-                <span>tpq.baiturrahim@gmail.com</span>
+                <span>ubadar696@gmail.com</span>
               </div>
               <div className="flex items-center gap-2.5 text-sm text-slate-500 dark:text-slate-400">
                 <Clock className="w-4 h-4 shrink-0" />

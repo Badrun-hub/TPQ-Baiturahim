@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/galeri', label: 'Galeri' },
   { to: '/prestasi', label: 'Prestasi' },
   { to: '/keuangan', label: 'Keuangan' },
+  { to: '/kontak', label: 'Kontak' },
 ];
 
 export default function Navbar() {

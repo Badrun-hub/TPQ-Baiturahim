@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Galeri from './pages/Galeri';
 import Prestasi from './pages/Prestasi';
 import Keuangan from './pages/Keuangan';
+import Kontak from './pages/Kontak';
 
 // Admin pages
 import Login from './pages/Login';
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/galeri" element={<Galeri />} />
             <Route path="/prestasi" element={<Prestasi />} />
             <Route path="/keuangan" element={<Keuangan />} />
+            <Route path="/kontak" element={<Kontak />} />
 
             {/* Admin Login */}
             <Route path="/admin/login" element={<Login />} />
